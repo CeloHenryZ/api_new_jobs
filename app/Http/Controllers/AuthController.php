@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use App\Providers\FunctionServiceProvider;
-use http\Env\Response;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-
 
 class AuthController extends Controller
 {
@@ -27,8 +23,6 @@ class AuthController extends Controller
 
                 if ($validated = $req->validated()) {
 
-                    $req->verifyCpfOrCnpj($req);
-
                     $user = User::create(
                         array_merge(
                             $validated,
@@ -36,10 +30,10 @@ class AuthController extends Controller
                         )
                     );
 
-                    if ($user->find($user->id)) {
+                    if ($token = auth()->attempt($validated)) {
                         return response()->json([
                             "response" => "Usuario criado com sucesso",
-                            "token" => $this->login(),
+                            "token" => $this->respondWithToken($token),
                         ], 201);
                     }
 
@@ -52,19 +46,17 @@ class AuthController extends Controller
                 return response($e);
             }
         }
-
-
     }
 
-    public function login()
+    public function login(LoginRequest $req)
     {
-        $credentials = request(['email', 'password']);
+        if($credentials = $req->validated()) {
+            if(! $token = auth()->attempt($credentials)){
+                return response()->json(['error' => 'unauthorized'], 401);
+            }
 
-        if(! $token = auth()->attempt($credentials)){
-            return response()->json(['error' => 'unauthorized'], 401);
+            return $this->respondWithToken($token);
         }
-
-        return $this->respondWithToken($token);
     }
 
 

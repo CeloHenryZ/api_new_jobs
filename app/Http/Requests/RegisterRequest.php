@@ -72,8 +72,8 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'cpf.required' => 'o campo cpf é obrigatorio',
-            'cpf.unique' => 'número de cpf já cadastrado',
+            //'cpf.required' => 'o campo cpf é obrigatorio',
+            //'cpf.unique' => 'número de cpf já cadastrado',
             'name.required' => 'o campo nome é obrigatorio',
             'name.min' => 'Digite um nome válido',
             'password.required' => "o campo senha é obrigatorio",
