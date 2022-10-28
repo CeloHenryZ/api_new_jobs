@@ -50,12 +50,15 @@ class AuthController extends Controller
 
     public function login(LoginRequest $req)
     {
-        if($credentials = $req->validated()) {
-            if(! $token = auth()->attempt($credentials)){
-                return response()->json(['error' => 'unauthorized'], 401);
-            }
-
-            return $this->respondWithToken($token);
+        try{
+                $credentials = $req->validated();
+                    if(! $token = auth()->attempt($credentials)){
+                        return response()->json(['error' => 'unauthorized'], 401);
+                    }
+                    return $this->respondWithToken($token);
+        }
+        catch(\Exception $e) {
+                return $e;
         }
     }
 

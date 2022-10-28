@@ -6,6 +6,10 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
 {
+    protected $stopOnFirstFailure = false;
+    protected $redirect = false;
+    protected $redirectRoute = false;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,8 +28,18 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'cpf/cnpj' => 'required|cpf_ou_cnpj|formato_cpf_ou_cnpj',
-            'password' => 'required|min:5'
+            'name' => 'required|exists:App\Models\User,name',
+            'password' => 'required'
+        ];
+    }
+
+    public function messages() {
+        return [
+            "name.required" => "campo nome é obrigatório",
+            "name.exists" => "Usuário não cadastrado",
+
+            "password.required" => "campo senha é obrigatório",
+
         ];
     }
 }

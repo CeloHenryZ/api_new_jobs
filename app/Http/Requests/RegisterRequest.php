@@ -24,8 +24,8 @@ class RegisterRequest extends FormRequest
             "cpf.declined" => "o campo cpf deve ser enviado com '0', 'false', 'no', ou 'off'",
 
             "cnpj.cnpj" => "o campo cnpj não é válido",
-            "required" => "o campo cpf é obrigatório",
-            "unique" => "esse cnpj já está cadastrado",
+            "cnpj.required" => "o campo cnpj é obrigatório",
+            "cnpj.unique" => "esse cnpj já está cadastrado",
             "cnpj.declined" => "o campo cnpj deve ser enviado com '0', 'false', 'no', ou 'off'"
         ];
 
@@ -74,8 +74,10 @@ class RegisterRequest extends FormRequest
         return [
             //'cpf.required' => 'o campo cpf é obrigatorio',
             //'cpf.unique' => 'número de cpf já cadastrado',
+
             'name.required' => 'o campo nome é obrigatorio',
             'name.min' => 'Digite um nome válido',
+
             'password.required' => "o campo senha é obrigatorio",
             'password.min' => 'a senha deve ter no minimo 5 caracteres',
             'password.confirmed' => 'a confirmação e senha não são iguais',
