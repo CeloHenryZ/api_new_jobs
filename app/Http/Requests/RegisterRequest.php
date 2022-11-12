@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\TypeUser;
+use App\Rules\VerifyName;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -62,7 +63,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             //'cpf' => 'required|cpf_ou_cnpj|formato_cpf_ou_cnpj|unique:users,cpf',
-            'name' => 'required|min:5|max:100',
+            'name' => ['required', 'min:5', 'max:100', new VerifyName],
             'email' => 'required|email:rfc,dns',
             'password' => 'required|min:5|max:100',
             'type' => ['required', new TypeUser]
@@ -82,6 +83,11 @@ class RegisterRequest extends FormRequest
             'password.min' => 'a senha deve ter no minimo 5 caracteres',
             'password.confirmed' => 'a confirmação e senha não são iguais',
             'password_confirmation.required' => 'confirmação de senha obrigatoria',
+
+            'email.required' => 'o campo Email é obrigatório',
+            'email.email' => "Email inválido",
+
+            "type.required" => "o campo type é obrigatorio"
         ];
     }
 }

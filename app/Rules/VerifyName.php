@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class TypeUser implements Rule
+class VerifyName implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,7 +25,7 @@ class TypeUser implements Rule
      */
     public function passes($attribute, $value)
     {
-        return $value == "pessoa_fisica" || $value == "pessoa_juridica";
+       return preg_match("/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/", $value );
     }
 
     /**
@@ -35,6 +35,6 @@ class TypeUser implements Rule
      */
     public function message()
     {
-        return 'selecione entre pessoa juridica ou fisica.';
+        return 'digite um nome válido';
     }
 }

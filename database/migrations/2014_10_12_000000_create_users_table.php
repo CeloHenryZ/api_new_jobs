@@ -17,8 +17,8 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('type');
-            $table->string('cpf')->unique();
-            $table->string('cnpj')->unique();
+            $table->string('cpf');
+            $table->string('cnpj');
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

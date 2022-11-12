@@ -33,4 +33,13 @@ class CurriculumRequest extends FormRequest
             "skills" => "required|string",
         ];
     }
+
+    public function messaeges()
+    {
+        return [
+                "name.required" => "o campo name é obrigatório",
+                "name:min" => "o campo"
+        ];
+
+    }
 }
