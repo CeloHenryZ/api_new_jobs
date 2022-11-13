@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ArrayJson;
+use App\Rules\VerifyName;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CurriculumRequest extends FormRequest
@@ -24,21 +26,24 @@ class CurriculumRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required|min:3|string",
-            "last_name" => "required|min:3|string",
-            "email" => "email:rfc,dns|string",
-            "phone_number" => "required|telefone_com_ddd|string",
-            "experience" => "required|min:10|max:2000|string",
+            "name" => ["required","string", new VerifyName],
+            "email" => "email:rfc,dns|string|required",
+            "phone_number" => "required|celular_com_ddd|string",
+            "experience" => new ArrayJson([
+                "years" => "integer|required",
+                "companies" => "array|required"
+            ]),
+            "experience.years" => "integer",
+            "experience.companies" => "array",
             "schooling" => "required|string",
             "skills" => "required|string",
         ];
     }
 
-    public function messaeges()
+    public function messages()
     {
         return [
-                "name.required" => "o campo name é obrigatório",
-                "name:min" => "o campo"
+
         ];
 
     }

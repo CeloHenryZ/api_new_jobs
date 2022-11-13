@@ -19,19 +19,10 @@ class CurriculumController extends Controller
 
             $user = auth()->user();
             if($form_curriculum = $req->validated()) {
-                $parts = explode(" ", $user->name);
-                $lastName = array_pop($parts);
-                $firstName = implode(" ", $parts);
-                $form_curriculum = Curriculo::create(
-                    array_merge($form_curriculum, [
-                        "name" => $firstName,
-                        "last_name" => $lastName,
-                        "email" => $user->email,
-                    ])
-                );
+                $form_curriculum = Curriculo::create($form_curriculum);
                 return response()->json([
-                    "response" => $form_curriculum
-                ], 201);
+                    "response" => $form_curriculum,
+                ],  201);
             }
 
         }

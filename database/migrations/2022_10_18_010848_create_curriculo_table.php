@@ -16,7 +16,6 @@ class CreateCurriculoTable extends Migration
         Schema::create('curriculo', function (Blueprint $table) {
             $table->id('id_curriculo');
             $table->string('name');
-            $table->string('last_name');
             $table->string('email');
             $table->string('phone_number');
             $table->string('experience');

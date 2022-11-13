@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Model;
 
 class Curriculo extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id_curriculo';
+    protected $collection = 'curriculo';
+    protected $connection = 'mongodb';
     /**
      * The attributes that are mass assignable.
      *
@@ -17,7 +18,6 @@ class Curriculo extends Model
      */
     protected $fillable = [
         'name',
-        'last_name',
         'email',
         'phone_number',
         'experience',
