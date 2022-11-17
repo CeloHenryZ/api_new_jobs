@@ -19,6 +19,7 @@ class CreateVagasTable extends Migration
            $table->string('company_name');
            $table->string('necessary_skills');
            $table->string('level');
+           $table->string('experience');
            $table->timestamps();
         });
     }
