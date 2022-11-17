@@ -30,6 +30,6 @@ Route::group([
     Route::post('me', [AuthController::class, 'me'])->name('auth.me');
 
     //curriculo
-    Route::post('createCurriculum', [CurriculumController::class, 'createCurriculum'])->name('curriculum.create');
+    Route::post('createCurriculum', [CurriculumController::class, 'createCurriculum'])->middleware(['check.cpf']);
 
 });

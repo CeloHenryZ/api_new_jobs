@@ -22,6 +22,7 @@ class Curriculo extends Model
         'phone_number',
         'experience',
         'schooling',
-        'skills'
+        'skills',
+        'id_user'
     ];
 }
