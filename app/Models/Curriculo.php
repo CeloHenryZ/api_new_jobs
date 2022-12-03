@@ -25,4 +25,6 @@ class Curriculo extends Model
         'skills',
         'id_user'
     ];
+
+    protected $dates = ['created_at', 'updated_at'];
 }

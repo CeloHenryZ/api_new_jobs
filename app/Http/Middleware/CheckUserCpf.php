@@ -19,7 +19,7 @@ class CheckUserCpf
     {
         $user = Auth::user();
         if($user->cpf == "false" || $user->cpf == false){
-            return response()->json(["response" => "tipo de usuário não autorizado"]);
+            return response()->json(["response" => "tipo de usuário não autorizado"], 401);
         }
         return $next($request);
     }
